@@ -1,11 +1,16 @@
 import { lazy } from 'react'
 import { RouteProps } from './Route'
 import { AppPath } from '../utils/enums'
+import { ValueOf } from '../utils/interfaces'
 
 import MainLayout from '../layouts/MainLayout'
 import EmptyLayout from '../layouts/EmptyLayout'
 
-const routes: Array<RouteProps> = [
+interface ExpandedRouteProps extends Omit<RouteProps, 'path'> {
+  path: ValueOf<typeof AppPath>
+}
+
+const routes: Array<ExpandedRouteProps> = [
   {
     path: AppPath.register,
     component: lazy(
