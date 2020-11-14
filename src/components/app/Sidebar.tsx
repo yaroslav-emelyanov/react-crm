@@ -17,9 +17,17 @@ const sidebarLinks: Array<ISidebarLink> = [
   { label: 'Категории', path: AppPath.categories },
 ]
 
-const Sidebar = () => {
+interface Props {
+  open: boolean
+}
+
+const Sidebar = ({ open }: Props) => {
+  const classes = ['sidenav', 'app-sidenav']
+
+  if (open) classes.push('open')
+
   return (
-    <ul className="sidenav app-sidenav open">
+    <ul className={classes.join(' ')}>
       {sidebarLinks.map((link) => (
         <SidebarLink
           to={link.path}
