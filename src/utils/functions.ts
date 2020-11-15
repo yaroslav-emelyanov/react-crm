@@ -13,3 +13,17 @@ export const reducerFactory = <S, H extends Handlers<S>>(
 
 export const updateState = <S>(state: S, update: Partial<S>) =>
   Object.assign({}, state, update)
+
+export const getQueryParams = (path: string) => {
+  const query = path.trim().replace(/^[?#&]/, '')
+  const result: { [key: string]: string } = {}
+
+  if (!query) return result
+
+  for (const params of query.split('&')) {
+    const [key, value] = params.split('=')
+    if (key && value) result[key] = value
+  }
+
+  return result
+}
