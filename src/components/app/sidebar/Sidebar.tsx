@@ -1,7 +1,7 @@
 import React from 'react'
-import { AppPath } from '../../utils/enums'
+import { AppPath } from '../../../utils/enums'
 import SidebarLink from './SidebarLink'
-import { ValueOf } from '../../utils/interfaces'
+import { ValueOf } from '../../../utils/interfaces'
 
 interface ISidebarLink {
   label: string

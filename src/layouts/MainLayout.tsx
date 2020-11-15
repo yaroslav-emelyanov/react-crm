@@ -1,8 +1,10 @@
 import React from 'react'
-import Navbar from '../components/app/Navbar'
-import Sidebar from '../components/app/Sidebar'
+import Navbar from '../components/app/navbar'
+import Sidebar from '../components/app/sidebar'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/rootState'
+import { NavLink } from 'react-router-dom'
+import { AppPath } from '../utils/enums'
 
 const MainLayout: React.FC = ({ children }) => {
   const open = useSelector((state: RootState) => state.common.openSidebar)
@@ -21,9 +23,9 @@ const MainLayout: React.FC = ({ children }) => {
         </main>
 
         <div className="fixed-action-btn">
-          <a className="btn-floating btn-large blue" href="/#">
+          <NavLink className="btn-floating btn-large blue" to={AppPath.record}>
             <i className="large material-icons">add</i>
-          </a>
+          </NavLink>
         </div>
       </div>
     </div>

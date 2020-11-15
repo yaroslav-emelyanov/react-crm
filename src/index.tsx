@@ -2,9 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider as StoreProvider } from 'react-redux'
-import store from './store'
 
-import 'materialize-css/dist/js/materialize.min'
+import store from './store'
 import App from './App'
 
 ReactDOM.render(
