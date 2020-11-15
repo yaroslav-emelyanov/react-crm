@@ -5,6 +5,8 @@ const openSidebar = (): CommonAction => ({
   type: OPEN_SIDEBAR,
 })
 
-export default {
+const commonActions = {
   openSidebar,
 }
+
+export default commonActions

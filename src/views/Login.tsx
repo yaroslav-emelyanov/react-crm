@@ -1,20 +1,37 @@
 import React from 'react'
+import { SubmitHandler, useForm, FormProvider } from 'react-hook-form'
+import { AppPath } from '../utils/enums'
+import { NavLink, useHistory } from 'react-router-dom'
+import EmailField from '../components/form/EmailField'
+import PasswordField from '../components/form/PasswordField'
+
+interface DefaultValues {
+  email: string
+  password: string
+}
+
+const defaultValues: DefaultValues = {
+  email: '',
+  password: '',
+}
 
 const Login = () => {
+  const form = useForm({ defaultValues })
+  const history = useHistory()
+
+  const onSubmit: SubmitHandler<DefaultValues> = (data) => {
+    console.log('data', data)
+    history.push(AppPath.home)
+  }
+
   return (
-    <form className="card auth-card">
+    <form className="card auth-card" onSubmit={form.handleSubmit(onSubmit)}>
       <div className="card-content">
         <span className="card-title">Домашняя бухгалтерия</span>
-        <div className="input-field">
-          <input id="email" type="text" className="validate" />
-          <label htmlFor="email">Email</label>
-          <small className="helper-text invalid">Email</small>
-        </div>
-        <div className="input-field">
-          <input id="password" type="password" className="validate" />
-          <label htmlFor="password">Пароль</label>
-          <small className="helper-text invalid">Password</small>
-        </div>
+        <FormProvider {...form}>
+          <EmailField />
+          <PasswordField />
+        </FormProvider>
       </div>
       <div className="card-action">
         <div>
@@ -29,7 +46,7 @@ const Login = () => {
 
         <p className="center">
           Нет аккаунта?
-          <a href="/">Зарегистрироваться</a>
+          <NavLink to={AppPath.register}>Зарегистрироваться</NavLink>
         </p>
       </div>
     </form>

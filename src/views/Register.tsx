@@ -1,31 +1,46 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { AppPath } from '../utils/enums'
+import { SubmitHandler, useForm, FormProvider } from 'react-hook-form'
+import EmailField from '../components/form/EmailField'
+import PasswordField from '../components/form/PasswordField'
+import TextField from '../components/form/TextField'
+import Checkbox from '../components/form/Checkbox'
+import { useHistory } from 'react-router-dom'
+
+interface DefaultValues {
+  email: string
+  password: string
+  name: string
+  agree: boolean
+}
+
+const defaultValues: DefaultValues = {
+  email: '',
+  password: '',
+  name: '',
+  agree: false,
+}
 
 const Register = () => {
+  const form = useForm({ defaultValues })
+  const history = useHistory()
+
+  const onSubmit: SubmitHandler<DefaultValues> = (data) => {
+    console.log('data', data)
+    history.push(AppPath.home)
+  }
+
   return (
-    <form className="card auth-card">
+    <form className="card auth-card" onSubmit={form.handleSubmit(onSubmit)}>
       <div className="card-content">
         <span className="card-title">Домашняя бухгалтерия</span>
-        <div className="input-field">
-          <input id="email" type="text" />
-          <label htmlFor="email">Email</label>
-          <small className="helper-text invalid">Email</small>
-        </div>
-        <div className="input-field">
-          <input id="password" type="password" className="validate" />
-          <label htmlFor="password">Пароль</label>
-          <small className="helper-text invalid">Password</small>
-        </div>
-        <div className="input-field">
-          <input id="name" type="text" className="validate" />
-          <label htmlFor="name">Имя</label>
-          <small className="helper-text invalid">Name</small>
-        </div>
-        <p>
-          <label>
-            <input type="checkbox" />
-            <span>С правилами согласен</span>
-          </label>
-        </p>
+        <FormProvider {...form}>
+          <EmailField />
+          <PasswordField />
+          <TextField name="name" label="Имя" message="Введите имя" />
+          <Checkbox name="agree" label="С правилами согласен" />
+        </FormProvider>
       </div>
       <div className="card-action">
         <div>
@@ -39,7 +54,7 @@ const Register = () => {
         </div>
         <p className="center">
           Уже есть аккаунт?
-          <a href="/">Войти!</a>
+          <NavLink to={AppPath.login}>Войти!</NavLink>
         </p>
       </div>
     </form>
