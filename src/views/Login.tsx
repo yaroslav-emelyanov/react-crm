@@ -4,6 +4,8 @@ import { AppPath } from '../utils/enums'
 import { NavLink, useHistory } from 'react-router-dom'
 import EmailField from '../components/form/EmailField'
 import PasswordField from '../components/form/PasswordField'
+import { useDispatch } from 'react-redux'
+import { action } from '../store/rootActions'
 
 interface DefaultValues {
   email: string
@@ -17,10 +19,12 @@ const defaultValues: DefaultValues = {
 
 const Login = () => {
   const form = useForm({ defaultValues })
+  const dispatch = useDispatch()
   const history = useHistory()
 
-  const onSubmit: SubmitHandler<DefaultValues> = (data) => {
-    console.log('data', data)
+  const onSubmit: SubmitHandler<DefaultValues> = async (data) => {
+    const response = await dispatch(action.login(data))
+    if (!response) return
     history.push(AppPath.home)
   }
 

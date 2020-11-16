@@ -1,4 +1,5 @@
 import { Action, Handler, Handlers } from './interfaces'
+import { messages } from './constants'
 
 export const reducerFactory = <S, H extends Handlers<S>>(
   initialState: S,
@@ -27,3 +28,6 @@ export const getQueryParams = (path: string) => {
 
   return result
 }
+
+export const getErrorMessage = (code: string) =>
+  messages[code] || messages.defaultError

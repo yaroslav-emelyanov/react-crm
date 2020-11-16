@@ -7,6 +7,8 @@ import PasswordField from '../components/form/PasswordField'
 import TextField from '../components/form/TextField'
 import Checkbox from '../components/form/Checkbox'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { action } from '../store/rootActions'
 
 interface DefaultValues {
   email: string
@@ -24,10 +26,12 @@ const defaultValues: DefaultValues = {
 
 const Register = () => {
   const form = useForm({ defaultValues })
+  const dispatch = useDispatch()
   const history = useHistory()
 
-  const onSubmit: SubmitHandler<DefaultValues> = (data) => {
-    console.log('data', data)
+  const onSubmit: SubmitHandler<DefaultValues> = async (data) => {
+    const access = await dispatch(action.register(data))
+    if (!access) return
     history.push(AppPath.home)
   }
 

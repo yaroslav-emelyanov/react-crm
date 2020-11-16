@@ -27,7 +27,7 @@ const Route = (props: RouteProps) => {
       {...rest}
       render={(props) => (
         <Layout>
-          <Suspense fallback={<div>HELLO NIGGA!</div>}>
+          <Suspense fallback={<div>Loading...</div>}>
             <Component {...props} />
           </Suspense>
         </Layout>
