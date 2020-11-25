@@ -3,7 +3,11 @@ import {
   Route as RouteComponent,
   RouteComponentProps,
   RouteProps as RoutePropsType,
+  Redirect,
 } from 'react-router-dom'
+import firebase from 'firebase'
+import { AppPath } from '../utils/enums'
+import Loader from '../components/app/loader/Loader'
 
 export interface RouteProps extends Omit<RoutePropsType, 'component' | 'path'> {
   path: string
@@ -11,6 +15,7 @@ export interface RouteProps extends Omit<RoutePropsType, 'component' | 'path'> {
     | React.ComponentType<RouteComponentProps<any>>
     | React.ComponentType<any>
   layout?: React.ComponentType<any>
+  protected?: boolean
 }
 
 const DefaultLayout: React.FC = ({ children }) => <>{children}</>
@@ -19,16 +24,25 @@ const Route = (props: RouteProps) => {
   const {
     component: Component,
     layout: Layout = DefaultLayout,
+    protected: protectedRoute,
     ...rest
   } = props
+
+  const isAuth = firebase.auth().currentUser
 
   return (
     <RouteComponent
       {...rest}
       render={(props) => (
         <Layout>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Component {...props} />
+          <Suspense fallback={<Loader />}>
+            {!protectedRoute ? (
+              <Component {...props} />
+            ) : isAuth ? (
+              <Component {...props} />
+            ) : (
+              <Redirect to={AppPath.login} />
+            )}
           </Suspense>
         </Layout>
       )}

@@ -1,3 +1,7 @@
-export interface AuthState {}
+export interface AuthState {
+  authenticated: boolean
+}
 
-export const authState: AuthState = {}
+export const authState: AuthState = {
+  authenticated: false,
+}

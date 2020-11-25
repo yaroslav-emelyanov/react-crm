@@ -8,6 +8,7 @@ import EmptyLayout from '../layouts/EmptyLayout'
 
 interface ExpandedRouteProps extends Omit<RouteProps, 'path'> {
   path: ValueOf<typeof AppPath>
+  protected?: boolean
 }
 
 const routes: Array<ExpandedRouteProps> = [
@@ -32,6 +33,7 @@ const routes: Array<ExpandedRouteProps> = [
     ),
     layout: MainLayout,
     exact: true,
+    protected: true,
   },
   {
     path: AppPath.categories,
@@ -39,6 +41,7 @@ const routes: Array<ExpandedRouteProps> = [
       () => import(/* webpackChunkName: "categories" */ '../views/Categories')
     ),
     layout: MainLayout,
+    protected: true,
   },
   {
     path: AppPath.detailRecord,
@@ -47,6 +50,7 @@ const routes: Array<ExpandedRouteProps> = [
         import(/* webpackChunkName: "detail-record" */ '../views/DetailRecord')
     ),
     layout: MainLayout,
+    protected: true,
   },
   {
     path: AppPath.history,
@@ -54,6 +58,7 @@ const routes: Array<ExpandedRouteProps> = [
       () => import(/* webpackChunkName: "history" */ '../views/History')
     ),
     layout: MainLayout,
+    protected: true,
   },
   {
     path: AppPath.planning,
@@ -61,6 +66,7 @@ const routes: Array<ExpandedRouteProps> = [
       () => import(/* webpackChunkName: "planning" */ '../views/Planning')
     ),
     layout: MainLayout,
+    protected: true,
   },
   {
     path: AppPath.profile,
@@ -75,6 +81,7 @@ const routes: Array<ExpandedRouteProps> = [
       () => import(/* webpackChunkName: "record" */ '../views/Record')
     ),
     layout: MainLayout,
+    protected: true,
   },
 ]
 

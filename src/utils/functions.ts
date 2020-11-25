@@ -31,3 +31,8 @@ export const getQueryParams = (path: string) => {
 
 export const getErrorMessage = (code: string) =>
   messages[code] || messages.defaultError
+
+export const getBaseRate = (bill: number, from: number, to: number) =>
+  bill / (to / from)
+export const computedCurrency = (base: number, rate: number) =>
+  Math.floor(base * rate)

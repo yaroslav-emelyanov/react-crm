@@ -2,15 +2,27 @@ import React, { useEffect, useRef } from 'react'
 import { AppPath } from '../../../utils/enums'
 import { NavLink } from 'react-router-dom'
 import { Dropdown } from 'materialize-css'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../../store/rootState'
+import { useHistory } from 'react-router-dom'
+import { action } from '../../../store/rootActions'
 
 const NavbarDropdown = () => {
+  const { name } = useSelector((state: RootState) => state.info)
   const refDropdown = useRef<HTMLAnchorElement>(null)
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
     let dropdown: Dropdown | undefined
     if (refDropdown.current) dropdown = Dropdown.init(refDropdown.current)
     return () => dropdown?.destroy()
   }, [])
+
+  const logout = () => {
+    history.push(AppPath.login + '?message=logout')
+    dispatch(action.logout())
+  }
 
   return (
     <ul className="right hide-on-small-and-down">
@@ -21,7 +33,7 @@ const NavbarDropdown = () => {
           data-target="dropdown"
           ref={refDropdown}
         >
-          USER NAME
+          {name || '-'}
           <i className="material-icons right">arrow_drop_down</i>
         </a>
 
@@ -33,12 +45,9 @@ const NavbarDropdown = () => {
           </li>
           <li className="divider" tabIndex={-1} />
           <li>
-            <NavLink
-              to={AppPath.login + '?message=logout'}
-              className="black-text"
-            >
+            <a href="/#" onClick={logout} className="black-text">
               <i className="material-icons">assignment_return</i>Выйти
-            </NavLink>
+            </a>
           </li>
         </ul>
       </li>

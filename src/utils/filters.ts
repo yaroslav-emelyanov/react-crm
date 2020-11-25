@@ -1,4 +1,7 @@
-export const dateFilter = (value: Date, format: string = 'date') => {
+import { Rate } from './enums'
+
+export const dateFilter = (value?: Date, format: string = 'date'): string => {
+  if (!value) return '-'
   const options: Intl.DateTimeFormatOptions = {}
 
   if (format.includes('date')) {
@@ -14,4 +17,11 @@ export const dateFilter = (value: Date, format: string = 'date') => {
   }
 
   return new Intl.DateTimeFormat('ru-RU', options).format(value)
+}
+
+export const currencyFilter = (value: number, currency: Rate = Rate.RUB) => {
+  return new Intl.NumberFormat('ru-RU', {
+    style: 'currency',
+    currency,
+  }).format(value)
 }

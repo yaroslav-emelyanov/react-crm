@@ -9,3 +9,9 @@ export enum AppPath {
   record = '/record',
   register = '/register',
 }
+
+export enum Rate {
+  EUR = 'EUR',
+  RUB = 'RUB',
+  USD = 'USD',
+}
