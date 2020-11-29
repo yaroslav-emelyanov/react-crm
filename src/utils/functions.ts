@@ -1,5 +1,6 @@
 import { Action, Handler, Handlers } from './interfaces'
 import { messages } from './constants'
+import clone from 'clone'
 
 export const reducerFactory = <S, H extends Handlers<S>>(
   initialState: S,
@@ -9,11 +10,12 @@ export const reducerFactory = <S, H extends Handlers<S>>(
 
   if (!handler) return state
 
-  return handler(state, action.payload)
-}
+  const cloneState = clone(state)
 
-export const updateState = <S>(state: S, update: Partial<S>) =>
-  Object.assign({}, state, update)
+  handler(cloneState, action.payload)
+
+  return cloneState
+}
 
 export const getQueryParams = (path: string) => {
   const query = path.trim().replace(/^[?#&]/, '')

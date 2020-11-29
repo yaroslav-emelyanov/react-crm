@@ -3,8 +3,6 @@ import firebase from 'firebase'
 import { CommonAction } from '../common'
 import { SET_ERROR } from '../common/constants'
 import { getErrorMessage } from '../../utils/functions'
-import { AuthAction } from './index'
-import { SET_AUTH } from './constatns'
 
 const login = ({
   email,
@@ -17,7 +15,7 @@ const login = ({
     await firebase.auth().signInWithEmailAndPassword(email, password)
     return true
   } catch (e) {
-    dispatch<CommonAction>({
+    dispatch<CommonAction<typeof SET_ERROR>>({
       type: SET_ERROR,
       payload: getErrorMessage(e.code),
     })
@@ -43,7 +41,7 @@ const register = ({
     })
     return true
   } catch (e) {
-    dispatch<CommonAction>({
+    dispatch<CommonAction<typeof SET_ERROR>>({
       type: SET_ERROR,
       payload: getErrorMessage(e.code),
     })
@@ -51,17 +49,11 @@ const register = ({
   }
 }
 
-const authentication = (value: boolean): AuthAction => ({
-  type: SET_AUTH,
-  payload: value,
-})
-
 const logout = () => async (dispatch: Dispatch) => {
   try {
     await firebase.auth().signOut()
-    dispatch({ type: SET_AUTH, payload: false })
   } catch (e) {
-    dispatch<CommonAction>({
+    dispatch<CommonAction<typeof SET_ERROR>>({
       type: SET_ERROR,
       payload: getErrorMessage(e.code),
     })
@@ -71,7 +63,6 @@ const logout = () => async (dispatch: Dispatch) => {
 const authActions = {
   login,
   register,
-  authentication,
   logout,
 }
 

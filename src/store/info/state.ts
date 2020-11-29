@@ -1,4 +1,4 @@
-import { Rates } from '../../utils/interfaces'
+import { Rates, Category } from '../../utils/interfaces'
 import { Rate } from '../../utils/enums'
 
 export interface InfoState {
@@ -6,6 +6,7 @@ export interface InfoState {
   bill: number
   dateRates: Date | undefined
   rates: Rates
+  categories: Category[]
 }
 
 export const infoState: InfoState = {
@@ -17,4 +18,5 @@ export const infoState: InfoState = {
     [Rate.USD]: 0,
     [Rate.EUR]: 0,
   },
+  categories: [],
 }

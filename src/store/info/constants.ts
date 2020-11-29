@@ -1,2 +1,5 @@
 export const SET_USER_INFO = Symbol('SET_INFO')
 export const SET_RATES = Symbol('SET_RATES')
+export const ADD_CATEGORY = Symbol('ADD_CATEGORY')
+export const SET_CATEGORIES = Symbol('SET_CATEGORIES')
+export const UPDATE_CATEGORY = Symbol('UPDATE_CATEGORY')

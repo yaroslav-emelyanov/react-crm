@@ -1,11 +1,11 @@
 import { CommonAction } from './index'
 import { OPEN_SIDEBAR, SET_ERROR } from './constants'
 
-const openSidebar = (): CommonAction => ({
+const openSidebar = (): CommonAction<typeof OPEN_SIDEBAR> => ({
   type: OPEN_SIDEBAR,
 })
 
-const setError = (error: string): CommonAction => ({
+const setError = (error: string): CommonAction<typeof SET_ERROR> => ({
   type: SET_ERROR,
   payload: error,
 })

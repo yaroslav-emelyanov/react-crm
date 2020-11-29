@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom'
 import { AppPath } from '../utils/enums'
 import { action } from '../store/rootActions'
 import Loader from '../components/app/loader/Loader'
+import firebase from 'firebase'
 
 const MainLayout: React.FC = ({ children }) => {
   const open = useSelector((state: RootState) => state.common.openSidebar)
@@ -22,7 +23,8 @@ const MainLayout: React.FC = ({ children }) => {
   }, [dispatch, setLoading])
 
   useEffect(() => {
-    if (!name) getUserInfo()
+    const isAuth = firebase.auth().currentUser
+    if (isAuth && !name) getUserInfo()
   }, [name, getUserInfo])
 
   if (!open) classes.push('full')

@@ -1,14 +1,12 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { AppPath } from '../utils/enums'
-import { SubmitHandler, useForm, FormProvider } from 'react-hook-form'
-import EmailField from '../components/form/EmailField'
-import PasswordField from '../components/form/PasswordField'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TextField from '../components/form/TextField'
 import Checkbox from '../components/form/Checkbox'
-import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { action } from '../store/rootActions'
+import { emailRegex } from '../utils/regex'
 
 interface DefaultValues {
   email: string
@@ -40,9 +38,39 @@ const Register = () => {
       <div className="card-content">
         <span className="card-title">Домашняя бухгалтерия</span>
         <FormProvider {...form}>
-          <EmailField />
-          <PasswordField />
-          <TextField name="name" label="Имя" message="Введите имя" />
+          <TextField
+            name="email"
+            label="Email"
+            validationRules={{
+              required: { value: true, message: 'Введите email' },
+              pattern: {
+                value: emailRegex,
+                message: 'Введите корректную почту',
+              },
+            }}
+          />
+          <TextField
+            name="password"
+            type="password"
+            label="Пароль"
+            validationRules={{
+              required: {
+                value: true,
+                message: 'Введите пароль',
+              },
+              minLength: {
+                value: 6,
+                message: `Пароль не должен быть менее чем ${6} символов`,
+              },
+            }}
+          />
+          <TextField
+            name="name"
+            label="Имя"
+            validationRules={{
+              required: { value: true, message: 'Введите имя' },
+            }}
+          />
           <Checkbox name="agree" label="С правилами согласен" />
         </FormProvider>
       </div>

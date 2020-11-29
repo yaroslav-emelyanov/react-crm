@@ -19,7 +19,8 @@ const NavbarDropdown = () => {
     return () => dropdown?.destroy()
   }, [])
 
-  const logout = () => {
+  const logout = (e: React.SyntheticEvent) => {
+    e.preventDefault()
     history.push(AppPath.login + '?message=logout')
     dispatch(action.logout())
   }
