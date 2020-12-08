@@ -4,6 +4,6 @@ export interface CommonState {
 }
 
 export const commonState: CommonState = {
-  openSidebar: false,
+  openSidebar: true,
   error: '',
 }

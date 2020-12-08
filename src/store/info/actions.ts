@@ -10,13 +10,15 @@ import {
   ADD_CATEGORY,
   SET_CATEGORIES,
   UPDATE_CATEGORY,
+  CREATE_RECORD,
 } from './constants'
 import { InfoState } from './state'
 import {
   CategoriesObject,
   Category,
   CategoryParams,
-  Rates,
+  Rate,
+  Record,
 } from '../../utils/interfaces'
 
 const FIXER_KEY = process.env.REACT_APP_FIXER_API_KEY
@@ -48,7 +50,7 @@ const getCurrency = () => async (dispatch: Dispatch): Promise<void> => {
     const response = await fetch(
       `http://data.fixer.io/api/latest?access_key=${FIXER_KEY}&symbols=USD,EUR,RUB`
     )
-    const { rates, date }: { rates: Rates; date: Date } = await response.json()
+    const { rates, date }: { rates: Rate; date: Date } = await response.json()
     dispatch<InfoAction<typeof SET_RATES>>({
       type: SET_RATES,
       payload: { rates, dateRates: date },
@@ -124,12 +126,50 @@ const updateCategory = (category: Category) => async (
   }
 }
 
+const createRecord = (record: Record) => async (
+  dispatch: Dispatch
+): Promise<void> => {
+  try {
+    const user = firebase.auth().currentUser
+    await firebase.database().ref(`/users/${user?.uid}/records`).push(record)
+    dispatch<InfoAction<typeof CREATE_RECORD>>({
+      type: CREATE_RECORD,
+      payload: record,
+    })
+  } catch (e) {
+    dispatch<CommonAction<typeof SET_ERROR>>({
+      type: SET_ERROR,
+      payload: getErrorMessage(e.code),
+    })
+  }
+}
+
+const updateUserInfo = (userInfo: { name: string; bill: number }) => async (
+  dispatch: Dispatch
+): Promise<void> => {
+  try {
+    const user = firebase.auth().currentUser
+    await firebase.database().ref(`/users/${user?.uid}/info`).update(userInfo)
+    dispatch<InfoAction<typeof SET_USER_INFO>>({
+      type: SET_USER_INFO,
+      payload: userInfo,
+    })
+  } catch (e) {
+    dispatch<CommonAction<typeof SET_ERROR>>({
+      type: SET_ERROR,
+      payload: getErrorMessage(e.code),
+    })
+  }
+}
+
 const infoActions = {
   getUserInfo,
   getCurrency,
   createCategory,
   getCategories,
   updateCategory,
+  createRecord,
+  updateUserInfo,
 }
 
 export default infoActions

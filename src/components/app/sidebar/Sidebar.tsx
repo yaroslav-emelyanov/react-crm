@@ -1,20 +1,20 @@
 import React from 'react'
-import { AppPath } from '../../../utils/enums'
+import { AppPaths } from '../../../utils/enums'
 import SidebarLink from './SidebarLink'
 import { ValueOf } from '../../../utils/interfaces'
 
 interface ISidebarLink {
   label: string
-  path: ValueOf<typeof AppPath>
+  path: ValueOf<typeof AppPaths>
   exact?: boolean
 }
 
 const sidebarLinks: Array<ISidebarLink> = [
-  { label: 'Счет', path: AppPath.home, exact: true },
-  { label: 'История', path: AppPath.history },
-  { label: 'Планирование', path: AppPath.planning },
-  { label: 'Новая запись', path: AppPath.record },
-  { label: 'Категории', path: AppPath.categories },
+  { label: 'Счет', path: AppPaths.home, exact: true },
+  { label: 'История', path: AppPaths.history },
+  { label: 'Планирование', path: AppPaths.planning },
+  { label: 'Новая запись', path: AppPaths.record },
+  { label: 'Категории', path: AppPaths.categories },
 ]
 
 interface Props {

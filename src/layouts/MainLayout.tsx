@@ -4,7 +4,7 @@ import Sidebar from '../components/app/sidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store/rootState'
 import { NavLink } from 'react-router-dom'
-import { AppPath } from '../utils/enums'
+import { AppPaths } from '../utils/enums'
 import { action } from '../store/rootActions'
 import Loader from '../components/app/loader/Loader'
 import firebase from 'firebase'
@@ -45,7 +45,7 @@ const MainLayout: React.FC = ({ children }) => {
           <div className="fixed-action-btn">
             <NavLink
               className="btn-floating btn-large blue"
-              to={AppPath.record}
+              to={AppPaths.record}
             >
               <i className="large material-icons">add</i>
             </NavLink>

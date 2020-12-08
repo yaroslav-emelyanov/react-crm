@@ -1,4 +1,4 @@
-import { Rate } from './enums'
+import { Rates, RecordTypes } from './enums'
 
 export type ValueOf<T> = T[keyof T]
 
@@ -24,8 +24,8 @@ export type CreateAction<
       payload: Parameters<H[K]>[1]
     }
 
-export type Rates = {
-  [key in Rate]: number
+export type Rate = {
+  [key in Rates]: number
 }
 
 export interface Category {
@@ -38,4 +38,14 @@ export type CategoryParams = Omit<Category, 'id'>
 
 export interface CategoriesObject {
   [categoryId: string]: Category
+}
+
+export type RecordType = keyof typeof RecordTypes
+
+export interface Record {
+  categoryId: string
+  amount: number
+  description: string
+  type: RecordType
+  date?: string
 }

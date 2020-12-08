@@ -20,6 +20,7 @@ const EditCategory = () => {
   const dispatch = useDispatch()
 
   const onSubmit: SubmitHandler<Category> = async (date) => {
+    date.limit = +date.limit
     await dispatch(action.updateCategory(date))
     notification.info('Категория успешно обновлена')
   }
@@ -35,7 +36,7 @@ const EditCategory = () => {
 
         <FormProvider {...formHook}>
           <form onSubmit={formHook.handleSubmit(onSubmit)}>
-            <CategorySelect items={categories} />
+            <CategorySelect name="id" items={categories} updateCategory />
             <TextField
               name="name"
               label="Название"

@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
-import { AppPath } from '../utils/enums'
+import { AppPaths } from '../utils/enums'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import TextField from '../components/form/TextField'
 import Checkbox from '../components/form/Checkbox'
@@ -30,7 +30,7 @@ const Register = () => {
   const onSubmit: SubmitHandler<DefaultValues> = async (data) => {
     const access = await dispatch(action.register(data))
     if (!access) return
-    history.push(AppPath.home)
+    history.push(AppPaths.home)
   }
 
   return (
@@ -86,7 +86,7 @@ const Register = () => {
         </div>
         <p className="center">
           Уже есть аккаунт?
-          <NavLink to={AppPath.login}>Войти!</NavLink>
+          <NavLink to={AppPaths.login}>Войти!</NavLink>
         </p>
       </div>
     </form>

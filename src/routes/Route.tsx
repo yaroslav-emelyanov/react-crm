@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 import firebase from 'firebase'
-import { AppPath } from '../utils/enums'
+import { AppPaths } from '../utils/enums'
 import Loader from '../components/app/loader/Loader'
 
 export interface RouteProps extends Omit<RoutePropsType, 'component' | 'path'> {
@@ -41,7 +41,7 @@ const Route = (props: RouteProps) => {
             ) : isAuth ? (
               <Component {...props} />
             ) : (
-              <Redirect to={AppPath.login} />
+              <Redirect to={AppPaths.login} />
             )}
           </Suspense>
         </Layout>

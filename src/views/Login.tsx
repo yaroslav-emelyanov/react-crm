@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { AppPath } from '../utils/enums'
+import { AppPaths } from '../utils/enums'
 import { NavLink, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { action } from '../store/rootActions'
@@ -25,7 +25,7 @@ const Login = () => {
   const onSubmit: SubmitHandler<DefaultValues> = async (data) => {
     const response = await dispatch(action.login(data))
     if (!response) return
-    history.push(AppPath.home)
+    history.push(AppPaths.home)
   }
 
   return (
@@ -74,7 +74,7 @@ const Login = () => {
 
         <p className="center">
           Нет аккаунта?
-          <NavLink to={AppPath.register}>Зарегистрироваться</NavLink>
+          <NavLink to={AppPaths.register}>Зарегистрироваться</NavLink>
         </p>
       </div>
     </form>

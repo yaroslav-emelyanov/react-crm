@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { AppPath } from '../../../utils/enums'
+import { AppPaths } from '../../../utils/enums'
 import { NavLink } from 'react-router-dom'
 import { Dropdown } from 'materialize-css'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,7 +21,7 @@ const NavbarDropdown = () => {
 
   const logout = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    history.push(AppPath.login + '?message=logout')
+    history.push(AppPaths.login + '?message=logout')
     dispatch(action.logout())
   }
 
@@ -40,7 +40,7 @@ const NavbarDropdown = () => {
 
         <ul id="dropdown" className="dropdown-content">
           <li>
-            <NavLink to={AppPath.profile} className="black-text">
+            <NavLink to={AppPaths.profile} className="black-text">
               <i className="material-icons">account_circle</i>Профиль
             </NavLink>
           </li>

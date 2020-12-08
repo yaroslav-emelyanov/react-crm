@@ -1,4 +1,4 @@
-export enum AppPath {
+export enum AppPaths {
   categories = '/categories',
   detailRecord = '/detail-record',
   history = '/history',
@@ -10,8 +10,13 @@ export enum AppPath {
   register = '/register',
 }
 
-export enum Rate {
+export enum Rates {
   EUR = 'EUR',
   RUB = 'RUB',
   USD = 'USD',
+}
+
+export enum RecordTypes {
+  income = 'income',
+  outcome = 'outcome',
 }

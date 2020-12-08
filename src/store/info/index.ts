@@ -5,7 +5,8 @@ import {
   Category,
   CreateAction,
   Handlers,
-  Rates,
+  Rate,
+  Record,
 } from '../../utils/interfaces'
 import {
   ADD_CATEGORY,
@@ -13,14 +14,16 @@ import {
   SET_RATES,
   SET_USER_INFO,
   UPDATE_CATEGORY,
+  CREATE_RECORD,
 } from './constants'
 
 interface InfoHandlers<S = InfoState> {
   [SET_USER_INFO](state: S, payload: { bill: number; name: string }): void
-  [SET_RATES](state: S, payload: { rates: Rates; dateRates: Date }): void
+  [SET_RATES](state: S, payload: { rates: Rate; dateRates: Date }): void
   [ADD_CATEGORY](state: S, payload: Category): void
   [SET_CATEGORIES](state: S, payload: CategoriesObject): void
   [UPDATE_CATEGORY](state: S, payload: Category): void
+  [CREATE_RECORD](state: S, payload: Record): void
 }
 
 const handlers: InfoHandlers & Handlers<InfoState> = {
@@ -48,6 +51,9 @@ const handlers: InfoHandlers & Handlers<InfoState> = {
     if (categoryIndex >= 0) {
       state.categories[categoryIndex] = updatedCategory
     }
+  },
+  [CREATE_RECORD](state, record) {
+    state.records.push(record)
   },
 }
 

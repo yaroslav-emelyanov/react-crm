@@ -1,6 +1,7 @@
-import { Action, Handler, Handlers } from './interfaces'
+import { Action, Handler, Handlers, Record } from './interfaces'
 import { messages } from './constants'
 import clone from 'clone'
+import { RecordTypes } from './enums'
 
 export const reducerFactory = <S, H extends Handlers<S>>(
   initialState: S,
@@ -36,5 +37,14 @@ export const getErrorMessage = (code: string) =>
 
 export const getBaseRate = (bill: number, from: number, to: number) =>
   bill / (to / from)
+
 export const computedCurrency = (base: number, rate: number) =>
   Math.floor(base * rate)
+
+export const canCreateRecord = (bill: number, record: Record) =>
+  record.type === RecordTypes.outcome && record.amount > bill
+
+export const calculateBill = (bill: number, record: Record) =>
+  record.type === RecordTypes.income
+    ? bill + record.amount
+    : bill - record.amount

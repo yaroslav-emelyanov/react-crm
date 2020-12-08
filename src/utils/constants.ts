@@ -1,4 +1,4 @@
-import { Rate } from './enums'
+import { Rates } from './enums'
 
 export const messages: { [key: string]: string } = {
   logout: 'Вы вышли из системы',
@@ -19,4 +19,4 @@ export const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 }
 
-export const currencies: Rate[] = [Rate.RUB, Rate.USD, Rate.EUR]
+export const currencies: Rates[] = [Rates.RUB, Rates.USD, Rates.EUR]

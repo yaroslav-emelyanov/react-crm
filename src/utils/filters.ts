@@ -1,4 +1,4 @@
-import { Rate } from './enums'
+import { Rates } from './enums'
 
 export const dateFilter = (value?: Date, format: string = 'date'): string => {
   if (!value) return '-'
@@ -19,7 +19,7 @@ export const dateFilter = (value?: Date, format: string = 'date'): string => {
   return new Intl.DateTimeFormat('ru-RU', options).format(value)
 }
 
-export const currencyFilter = (value: number, currency: Rate = Rate.RUB) => {
+export const currencyFilter = (value: number, currency: Rates = Rates.RUB) => {
   return new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency,

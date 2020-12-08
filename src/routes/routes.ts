@@ -1,33 +1,33 @@
 import { lazy } from 'react'
 import { RouteProps } from './Route'
-import { AppPath } from '../utils/enums'
+import { AppPaths } from '../utils/enums'
 import { ValueOf } from '../utils/interfaces'
 
 import MainLayout from '../layouts/MainLayout'
 import EmptyLayout from '../layouts/EmptyLayout'
 
 interface ExpandedRouteProps extends Omit<RouteProps, 'path'> {
-  path: ValueOf<typeof AppPath>
+  path: ValueOf<typeof AppPaths>
   protected?: boolean
 }
 
 const routes: Array<ExpandedRouteProps> = [
   {
-    path: AppPath.register,
+    path: AppPaths.register,
     component: lazy(
       () => import(/* webpackChunkName: "register" */ '../views/Register')
     ),
     layout: EmptyLayout,
   },
   {
-    path: AppPath.login,
+    path: AppPaths.login,
     component: lazy(
       () => import(/* webpackChunkName: "login" */ '../views/Login')
     ),
     layout: EmptyLayout,
   },
   {
-    path: AppPath.home,
+    path: AppPaths.home,
     component: lazy(
       () => import(/* webpackChunkName: "home" */ '../views/Home')
     ),
@@ -36,7 +36,7 @@ const routes: Array<ExpandedRouteProps> = [
     protected: true,
   },
   {
-    path: AppPath.categories,
+    path: AppPaths.categories,
     component: lazy(
       () => import(/* webpackChunkName: "categories" */ '../views/Categories')
     ),
@@ -44,7 +44,7 @@ const routes: Array<ExpandedRouteProps> = [
     protected: true,
   },
   {
-    path: AppPath.detailRecord,
+    path: AppPaths.detailRecord,
     component: lazy(
       () =>
         import(/* webpackChunkName: "detail-record" */ '../views/DetailRecord')
@@ -53,7 +53,7 @@ const routes: Array<ExpandedRouteProps> = [
     protected: true,
   },
   {
-    path: AppPath.history,
+    path: AppPaths.history,
     component: lazy(
       () => import(/* webpackChunkName: "history" */ '../views/History')
     ),
@@ -61,7 +61,7 @@ const routes: Array<ExpandedRouteProps> = [
     protected: true,
   },
   {
-    path: AppPath.planning,
+    path: AppPaths.planning,
     component: lazy(
       () => import(/* webpackChunkName: "planning" */ '../views/Planning')
     ),
@@ -69,14 +69,14 @@ const routes: Array<ExpandedRouteProps> = [
     protected: true,
   },
   {
-    path: AppPath.profile,
+    path: AppPaths.profile,
     component: lazy(
       () => import(/* webpackChunkName: "profile" */ '../views/Profile')
     ),
     layout: MainLayout,
   },
   {
-    path: AppPath.record,
+    path: AppPaths.record,
     component: lazy(
       () => import(/* webpackChunkName: "record" */ '../views/Record')
     ),
