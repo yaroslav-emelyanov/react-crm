@@ -1,7 +1,15 @@
-import { Action, Handler, Handlers, Record } from './interfaces'
+import {
+  Action,
+  Category,
+  CategoryProgress,
+  ExpandedCategory,
+  Handler,
+  Handlers,
+  Record,
+} from './interfaces'
 import { messages } from './constants'
 import clone from 'clone'
-import { RecordTypes } from './enums'
+import { ProgressColors, RecordTypes } from './enums'
 
 export const reducerFactory = <S, H extends Handlers<S>>(
   initialState: S,
@@ -48,3 +56,43 @@ export const calculateBill = (bill: number, record: Record) =>
   record.type === RecordTypes.income
     ? bill + record.amount
     : bill - record.amount
+
+export const getCategorySpend = (categoryId: string, records: Record[]) =>
+  records
+    .filter((record) => record.categoryId === categoryId)
+    .filter((record) => record.type === RecordTypes.outcome)
+    .reduce((total, record) => (total += record.amount), 0)
+
+export const getCategoryProgress = (
+  spend: number,
+  limit: number
+): CategoryProgress => {
+  const percent = (100 * spend) / limit
+  const progressPercent = percent > 100 ? 100 : percent
+  const color =
+    progressPercent < 80
+      ? ProgressColors.green
+      : progressPercent < 90
+      ? ProgressColors.yellow
+      : ProgressColors.red
+
+  return {
+    percent: progressPercent,
+    color,
+  }
+}
+
+export const expandCategories = (
+  categories: Category[],
+  records: Record[]
+): ExpandedCategory[] => {
+  return categories.map((category) => {
+    const spend = getCategorySpend(category.id, records)
+    const progress = getCategoryProgress(spend, category.limit)
+    return {
+      ...category,
+      spend,
+      progress,
+    }
+  })
+}

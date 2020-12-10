@@ -1,4 +1,4 @@
-import { Rates, RecordTypes } from './enums'
+import { ProgressColors, Rates, RecordTypes } from './enums'
 
 export type ValueOf<T> = T[keyof T]
 
@@ -34,6 +34,18 @@ export interface Category {
   limit: number
 }
 
+export type ProgressColor = keyof typeof ProgressColors
+
+export interface CategoryProgress {
+  percent: number
+  color: ProgressColor
+}
+
+export interface ExpandedCategory extends Category {
+  spend: number
+  progress: CategoryProgress
+}
+
 export type CategoryParams = Omit<Category, 'id'>
 
 export interface CategoriesObject {
@@ -48,4 +60,8 @@ export interface Record {
   description: string
   type: RecordType
   date?: string
+}
+
+export interface RecordsObject {
+  [categoryId: string]: Record
 }

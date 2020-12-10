@@ -7,6 +7,7 @@ import {
   Handlers,
   Rate,
   Record,
+  RecordsObject,
 } from '../../utils/interfaces'
 import {
   ADD_CATEGORY,
@@ -15,6 +16,7 @@ import {
   SET_USER_INFO,
   UPDATE_CATEGORY,
   CREATE_RECORD,
+  SET_RECORDS,
 } from './constants'
 
 interface InfoHandlers<S = InfoState> {
@@ -24,6 +26,7 @@ interface InfoHandlers<S = InfoState> {
   [SET_CATEGORIES](state: S, payload: CategoriesObject): void
   [UPDATE_CATEGORY](state: S, payload: Category): void
   [CREATE_RECORD](state: S, payload: Record): void
+  [SET_RECORDS](state: S, payload: RecordsObject): void
 }
 
 const handlers: InfoHandlers & Handlers<InfoState> = {
@@ -54,6 +57,12 @@ const handlers: InfoHandlers & Handlers<InfoState> = {
   },
   [CREATE_RECORD](state, record) {
     state.records.push(record)
+  },
+  [SET_RECORDS](state, recordsObject) {
+    state.records = Object.keys(recordsObject).map((recordId) => ({
+      ...recordsObject[recordId],
+      id: recordId,
+    }))
   },
 }
 

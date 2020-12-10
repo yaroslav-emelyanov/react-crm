@@ -11,6 +11,7 @@ import {
   SET_CATEGORIES,
   UPDATE_CATEGORY,
   CREATE_RECORD,
+  SET_RECORDS,
 } from './constants'
 import { InfoState } from './state'
 import {
@@ -19,6 +20,7 @@ import {
   CategoryParams,
   Rate,
   Record,
+  RecordsObject,
 } from '../../utils/interfaces'
 
 const FIXER_KEY = process.env.REACT_APP_FIXER_API_KEY
@@ -162,6 +164,26 @@ const updateUserInfo = (userInfo: { name: string; bill: number }) => async (
   }
 }
 
+const getRecords = () => async (dispatch: Dispatch): Promise<void> => {
+  try {
+    const user = firebase.auth().currentUser
+    const response = await firebase
+      .database()
+      .ref(`/users/${user?.uid}/records`)
+      .once('value')
+    const recordsObject: RecordsObject = response.val() || {}
+    dispatch<InfoAction<typeof SET_RECORDS>>({
+      type: SET_RECORDS,
+      payload: recordsObject,
+    })
+  } catch (e) {
+    dispatch<CommonAction<typeof SET_ERROR>>({
+      type: SET_ERROR,
+      payload: getErrorMessage(e.code),
+    })
+  }
+}
+
 const infoActions = {
   getUserInfo,
   getCurrency,
@@ -170,6 +192,7 @@ const infoActions = {
   updateCategory,
   createRecord,
   updateUserInfo,
+  getRecords,
 }
 
 export default infoActions

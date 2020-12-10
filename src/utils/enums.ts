@@ -20,3 +20,9 @@ export enum RecordTypes {
   income = 'income',
   outcome = 'outcome',
 }
+
+export enum ProgressColors {
+  green = 'green',
+  yellow = 'yellow',
+  red = 'red',
+}
