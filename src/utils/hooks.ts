@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router'
+import { useLocation, useRouteMatch } from 'react-router'
 import { getQueryParams } from './functions'
 import { notification } from './plugins'
 import { messages } from './constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store/rootState'
 import { action } from '../store/rootActions'
+import { Category, Record } from './interfaces'
 
 export const useTimer = (delay?: number): Date => {
   const [time, setTime] = useState(new Date())
@@ -34,4 +35,35 @@ export const useNotification = () => {
       dispatch(action.setError(''))
     }
   }, [dispatch, error])
+}
+
+export const useDetailRecord = () => {
+  const [record, setRecord] = useState<Record | null>(null)
+  const [category, setCategory] = useState<Category | null>(null)
+  const [loading, setLoading] = useState(false)
+  const {
+    params: { id },
+  } = useRouteMatch<{ id: string }>()
+  const dispatch = useDispatch<any>()
+
+  useEffect(() => {
+    ;(async () => {
+      setLoading(true)
+      const record: Record | null = await dispatch(
+        action.getRecordById(id || '')
+      )
+      const category: Category | null = await dispatch(
+        action.getCategoryById(record?.categoryId || '')
+      )
+      setRecord(record)
+      setCategory(category)
+      setLoading(false)
+    })()
+  }, [dispatch, setRecord, setCategory, id])
+
+  return {
+    loading,
+    record,
+    category,
+  }
 }

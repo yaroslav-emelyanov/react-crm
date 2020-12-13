@@ -20,6 +20,7 @@ import {
   CategoryParams,
   NewRecord,
   Rate,
+  Record,
   RecordsObject,
 } from '../../utils/interfaces'
 
@@ -187,6 +188,40 @@ const getRecords = () => async (dispatch: Dispatch): Promise<void> => {
   }
 }
 
+const getRecordById = (recordId: string) => async (
+  dispatch: Dispatch
+): Promise<Record | null> => {
+  try {
+    const user = firebase.auth().currentUser
+    const response = await firebase
+      .database()
+      .ref(`/users/${user?.uid}/records`)
+      .child(recordId)
+      .once('value')
+    const record: NewRecord | null = response.val()
+    return record ? { ...record, id: recordId } : null
+  } catch (e) {
+    return null
+  }
+}
+
+const getCategoryById = (categoryId: string) => async (
+  dispatch: Dispatch
+): Promise<Category | null> => {
+  try {
+    const user = firebase.auth().currentUser
+    const response = await firebase
+      .database()
+      .ref(`/users/${user?.uid}/categories`)
+      .child(categoryId)
+      .once('value')
+    const category: Omit<Category, 'id'> | null = response.val()
+    return category ? { ...category, id: categoryId } : null
+  } catch (e) {
+    return null
+  }
+}
+
 const infoActions = {
   getUserInfo,
   getCurrency,
@@ -196,6 +231,8 @@ const infoActions = {
   createRecord,
   updateUserInfo,
   getRecords,
+  getRecordById,
+  getCategoryById,
 }
 
 export default infoActions

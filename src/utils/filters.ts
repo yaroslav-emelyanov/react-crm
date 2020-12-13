@@ -24,7 +24,10 @@ export const dateFilter = (
   return new Intl.DateTimeFormat('ru-RU', options).format(resultValue)
 }
 
-export const currencyFilter = (value: number, currency: Rates = Rates.RUB) => {
+export const currencyFilter = (
+  value: number = 0,
+  currency: Rates = Rates.RUB
+) => {
   return new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency,

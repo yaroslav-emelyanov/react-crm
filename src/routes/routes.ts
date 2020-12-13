@@ -1,13 +1,12 @@
 import { lazy } from 'react'
 import { RouteProps } from './Route'
 import { AppPaths } from '../utils/enums'
-import { ValueOf } from '../utils/interfaces'
 
 import MainLayout from '../layouts/MainLayout'
 import EmptyLayout from '../layouts/EmptyLayout'
 
 interface ExpandedRouteProps extends Omit<RouteProps, 'path'> {
-  path: ValueOf<typeof AppPaths>
+  path: string
   protected?: boolean
 }
 
@@ -44,7 +43,7 @@ const routes: Array<ExpandedRouteProps> = [
     protected: true,
   },
   {
-    path: AppPaths.detailRecord,
+    path: AppPaths.detailRecord + '/:id',
     component: lazy(
       () =>
         import(/* webpackChunkName: "detail-record" */ '../views/DetailRecord')
