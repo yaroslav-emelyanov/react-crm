@@ -10,10 +10,10 @@ import Loader from '../components/app/loader/Loader'
 import { NavLink } from 'react-router-dom'
 import { AppPaths, RecordTypes } from '../utils/enums'
 import { notification } from '../utils/plugins'
-import { Record as IRecord } from '../utils/interfaces'
+import { NewRecord } from '../utils/interfaces'
 import { calculateBill, canCreateRecord } from '../utils/functions'
 
-const defaultValues: IRecord = {
+const defaultValues: NewRecord = {
   categoryId: '',
   amount: 1,
   description: '',
@@ -25,7 +25,7 @@ const Record = () => {
     (state: RootState) => state.info
   )
   const [loading, setLoading] = useState(false)
-  const formHook = useForm<IRecord>({ defaultValues })
+  const formHook = useForm<NewRecord>({ defaultValues })
   const dispatch = useDispatch()
 
   const getCategories = useCallback(async () => {
@@ -38,7 +38,7 @@ const Record = () => {
     getCategories()
   }, [getCategories])
 
-  const onSubmit: SubmitHandler<IRecord> = async (data) => {
+  const onSubmit: SubmitHandler<NewRecord> = async (data) => {
     data.amount = +data.amount
 
     if (canCreateRecord(bill, data)) {

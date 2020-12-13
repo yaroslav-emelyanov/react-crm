@@ -5,6 +5,7 @@ import {
   ExpandedCategory,
   Handler,
   Handlers,
+  NewRecord,
   Record,
 } from './interfaces'
 import { messages } from './constants'
@@ -49,10 +50,10 @@ export const getBaseRate = (bill: number, from: number, to: number) =>
 export const computedCurrency = (base: number, rate: number) =>
   Math.floor(base * rate)
 
-export const canCreateRecord = (bill: number, record: Record) =>
+export const canCreateRecord = (bill: number, record: NewRecord | Record) =>
   record.type === RecordTypes.outcome && record.amount > bill
 
-export const calculateBill = (bill: number, record: Record) =>
+export const calculateBill = (bill: number, record: NewRecord | Record) =>
   record.type === RecordTypes.income
     ? bill + record.amount
     : bill - record.amount

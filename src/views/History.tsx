@@ -1,47 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import HistoryTable from '../components/history/HistoryTable'
+import { useDispatch, useSelector } from 'react-redux'
+import { action } from '../store/rootActions'
+import Loader from '../components/app/loader/Loader'
+import { RootState } from '../store/rootState'
+import { NavLink } from 'react-router-dom'
+import { AppPaths } from '../utils/enums'
 
 const History = () => {
+  const { records } = useSelector((state: RootState) => state.info)
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    ;(async () => {
+      setLoading(true)
+      await dispatch(action.getCategories())
+      await dispatch(action.getRecords())
+      setLoading(false)
+    })()
+  }, [dispatch, setLoading])
+
   return (
     <div>
       <div className="page-title">
         <h3>История записей</h3>
       </div>
 
-      <div className="history-chart">
-        <canvas></canvas>
-      </div>
+      {loading ? (
+        <Loader />
+      ) : !records.length ? (
+        <p className="center">
+          Записей пока нет.{' '}
+          <NavLink to={AppPaths.record}>Создать запись</NavLink>
+        </p>
+      ) : (
+        <>
+          <div className="history-chart">
+            <canvas></canvas>
+          </div>
 
-      <section>
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Сумма</th>
-              <th>Дата</th>
-              <th>Категория</th>
-              <th>Тип</th>
-              <th>Открыть</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>1212</td>
-              <td>12.12.32</td>
-              <td>name</td>
-              <td>
-                <span className="white-text badge red">Расход</span>
-              </td>
-              <td>
-                <button className="btn-small btn">
-                  <i className="material-icons">open_in_new</i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+          <section>
+            <HistoryTable />
+          </section>
+        </>
+      )}
     </div>
   )
 }

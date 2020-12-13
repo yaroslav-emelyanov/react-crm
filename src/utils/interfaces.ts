@@ -54,7 +54,10 @@ export interface CategoriesObject {
 
 export type RecordType = keyof typeof RecordTypes
 
+export type NewRecord = Omit<Record, 'id'>
+
 export interface Record {
+  id: string
   categoryId: string
   amount: number
   description: string
@@ -63,5 +66,5 @@ export interface Record {
 }
 
 export interface RecordsObject {
-  [categoryId: string]: Record
+  [categoryId: string]: NewRecord
 }

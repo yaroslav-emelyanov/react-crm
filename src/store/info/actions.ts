@@ -18,8 +18,8 @@ import {
   CategoriesObject,
   Category,
   CategoryParams,
+  NewRecord,
   Rate,
-  Record,
   RecordsObject,
 } from '../../utils/interfaces'
 
@@ -128,15 +128,18 @@ const updateCategory = (category: Category) => async (
   }
 }
 
-const createRecord = (record: Record) => async (
+const createRecord = (record: NewRecord) => async (
   dispatch: Dispatch
 ): Promise<void> => {
   try {
     const user = firebase.auth().currentUser
-    await firebase.database().ref(`/users/${user?.uid}/records`).push(record)
+    const response = await firebase
+      .database()
+      .ref(`/users/${user?.uid}/records`)
+      .push(record)
     dispatch<InfoAction<typeof CREATE_RECORD>>({
       type: CREATE_RECORD,
-      payload: record,
+      payload: { ...record, id: response?.key || '' },
     })
   } catch (e) {
     dispatch<CommonAction<typeof SET_ERROR>>({
