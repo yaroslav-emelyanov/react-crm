@@ -2,6 +2,7 @@ import { Rates } from './enums'
 
 export const messages: { [key: string]: string } = {
   logout: 'Вы вышли из системы',
+  login: 'Для начала войдите в систему',
   'auth/user-not-found': 'Пользователь не найден',
   defaultError: 'Что то пошло не так...',
   'auth/wrong-password': 'Неверный пароль',

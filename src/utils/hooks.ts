@@ -33,5 +33,5 @@ export const useNotification = () => {
       notification.error(error)
       dispatch(action.setError(''))
     }
-  }, [error])
+  }, [dispatch, error])
 }

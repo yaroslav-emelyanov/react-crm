@@ -41,7 +41,7 @@ const Route = (props: RouteProps) => {
             ) : isAuth ? (
               <Component {...props} />
             ) : (
-              <Redirect to={AppPaths.login} />
+              <Redirect to={AppPaths.login + '?message=login'} />
             )}
           </Suspense>
         </Layout>
