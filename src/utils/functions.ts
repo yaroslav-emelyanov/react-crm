@@ -97,3 +97,14 @@ export const expandCategories = (
     }
   })
 }
+
+export const getChunks = (array: any[], size: number): any[] => {
+  if (!array) return []
+
+  const firstChunk = array.slice(0, size)
+  if (!firstChunk.length) {
+    return array
+  }
+
+  return [firstChunk].concat(getChunks(array.slice(size, array.length), size))
+}

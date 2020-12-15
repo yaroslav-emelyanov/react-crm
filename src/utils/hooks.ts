@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useRouteMatch } from 'react-router'
 import { getQueryParams } from './functions'
 import { notification } from './plugins'
@@ -66,4 +66,20 @@ export const useDetailRecord = () => {
     record,
     category,
   }
+}
+
+export const useQueryParams = <Params extends string>() => {
+  const { search } = useLocation()
+
+  return useMemo(() => {
+    const urlParams = new URLSearchParams(search)
+    const map: { [key: string]: string } = {}
+
+    for (const key of urlParams.keys()) {
+      const value = urlParams.get(key)
+      if (value) map[key] = value
+    }
+
+    return map as { [K in Params]?: string }
+  }, [search])
 }

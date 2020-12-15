@@ -1,11 +1,12 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store/rootState'
 import HistoryTableRow from './HistoryTableRow'
+import { Record } from '../../utils/interfaces'
 
-const HistoryTable = () => {
-  const { records } = useSelector((state: RootState) => state.info)
+interface Props {
+  records: Record[]
+}
 
+const HistoryTable = ({ records }: Props) => {
   return (
     <table>
       <thead>
