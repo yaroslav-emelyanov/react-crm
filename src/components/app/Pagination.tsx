@@ -15,7 +15,8 @@ const Paginate = ({ pageCount }: Props) => {
     history.push('?page=' + (selected + 1))
   }
 
-  const currentPage = isNaN(Number(page)) ? 0 : Number(page)
+  const currentPage =
+    !isNaN(Number(page)) && Number(page) <= pageCount ? Number(page) - 1 : 0
 
   return (
     <ReactPaginate

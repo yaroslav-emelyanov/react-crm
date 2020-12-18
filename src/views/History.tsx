@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { action } from '../store/rootActions'
 import Loader from '../components/app/loader/Loader'
 import { RootState } from '../store/rootState'
-import { NavLink, useHistory, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { AppPaths } from '../utils/enums'
 import { getChunks } from '../utils/functions'
 import Paginate from '../components/app/Pagination'
 import { useQueryParams } from '../utils/hooks'
+import HistoryChart from '../components/history/HistoryChart'
 
 const History = () => {
   const { records } = useSelector((state: RootState) => state.info)
@@ -44,10 +45,7 @@ const History = () => {
         </p>
       ) : (
         <>
-          <div className="history-chart">
-            <canvas></canvas>
-          </div>
-
+          <HistoryChart />
           <section>
             <HistoryTable records={currentRecords} />
             <Paginate pageCount={chunkRecords.length} />

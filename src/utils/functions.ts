@@ -108,3 +108,32 @@ export const getChunks = (array: any[], size: number): any[] => {
 
   return [firstChunk].concat(getChunks(array.slice(size, array.length), size))
 }
+
+export const getRandomNumber = (max: number, min: number) => {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+type ColorMap = { [key in '0.2' | '1']: string[] }
+
+export const getColors = (numberColors: number): ColorMap => {
+  const map: ColorMap = {
+    ['0.2']: [],
+    ['1']: [],
+  }
+
+  if (!numberColors) return map
+
+  const array = new Array(numberColors).fill('_')
+
+  array.forEach(() => {
+    const r = getRandomNumber(255, 0)
+    const g = getRandomNumber(255, 0)
+    const b = getRandomNumber(255, 0)
+    map['0.2'].push(`rgba(${r}, ${g}, ${b}, ${0.2})`)
+    map['1'].push(`rgba(${r}, ${g}, ${b}, ${1})`)
+  })
+
+  return map
+}
