@@ -4,9 +4,11 @@ import { RootState } from '../../store/rootState'
 import { computedCurrency, getBaseRate } from '../../utils/functions'
 import { currencyFilter } from '../../utils/filters'
 import { currencies } from '../../utils/constants'
+import { useTranslation } from 'react-i18next'
 
 const HomeBill = () => {
   const { bill, rates } = useSelector((state: RootState) => state.info)
+  const { t } = useTranslation()
 
   const baseRate = getBaseRate(bill, rates.EUR, rates.RUB)
 
@@ -14,7 +16,7 @@ const HomeBill = () => {
     <div className="col s12 m6 l4">
       <div className="card light-blue bill-card">
         <div className="card-content white-text">
-          <span className="card-title">Счет в валюте</span>
+          <span className="card-title">{t('account.currency_account')}</span>
           {currencies.map((currency) => {
             const compCur = computedCurrency(baseRate, rates[currency])
             return (

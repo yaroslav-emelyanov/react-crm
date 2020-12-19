@@ -1,0 +1,64 @@
+{
+  "common": {
+    "home_bookkeeping": "Home bookkeeping",
+    "date": "Date"
+  },
+  "form": {
+    "name": {
+      "label": "Name",
+      "error": {
+        "required": "Enter your name"
+      }
+    },
+    "email": {
+      "error": {
+        "required": "Enter email",
+        "pattern": "Enter a valid email"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "error": {
+        "required": "Enter password",
+        "minLength": "Password must be at least {{ amount }} characters"
+      }
+    },
+    "agree": {
+      "label": "I agree with the rules"
+    }
+  },
+  "profile": {
+    "label": "Profile",
+    "updated_user_name": "User name has been updated",
+    "update": "Update",
+    "logout": "Logout"
+  },
+  "register": {
+    "register_now": "Register now",
+    "account_exist": "Already have an account?",
+    "come_in": "To come in!"
+  },
+  "login": {
+    "come_in": "To come in",
+    "account_not_exist": "Don't have an account?"
+  },
+  "account": {
+    "label": "Account",
+    "currency": "Currency",
+    "currency_account": "Currency account",
+    "exchange_rate": "Exchange rate",
+    "exchange_rate_plural": "Exchange rates"
+  },
+  "history": {
+    "label": "History"
+  },
+  "planning": {
+    "label": "Planning"
+  },
+  "record": {
+    "label": "New record"
+  },
+  "categories": {
+    "label": "Categories"
+  }
+}

@@ -6,10 +6,12 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 
+import './i18n'
+
 import store from './store'
 import App from './App'
-import { firebaseConfig } from './utils/constants'
 
+import { firebaseConfig } from './utils/constants'
 firebase.initializeApp(firebaseConfig)
 
 let appInit = false

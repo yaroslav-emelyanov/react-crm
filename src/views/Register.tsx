@@ -7,6 +7,7 @@ import Checkbox from '../components/form/Checkbox'
 import { useDispatch } from 'react-redux'
 import { action } from '../store/rootActions'
 import { emailRegex } from '../utils/regex'
+import { useTranslation } from 'react-i18next'
 
 interface DefaultValues {
   email: string
@@ -24,6 +25,7 @@ const defaultValues: DefaultValues = {
 
 const Register = () => {
   const form = useForm({ defaultValues })
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -36,42 +38,45 @@ const Register = () => {
   return (
     <form className="card auth-card" onSubmit={form.handleSubmit(onSubmit)}>
       <div className="card-content">
-        <span className="card-title">Домашняя бухгалтерия</span>
+        <span className="card-title">{t('common.home_bookkeeping')}</span>
         <FormProvider {...form}>
           <TextField
             name="email"
             label="Email"
             validationRules={{
-              required: { value: true, message: 'Введите email' },
+              required: {
+                value: true,
+                message: t('form.email.error.required'),
+              },
               pattern: {
                 value: emailRegex,
-                message: 'Введите корректную почту',
+                message: t('form.email.error.pattern'),
               },
             }}
           />
           <TextField
             name="password"
             type="password"
-            label="Пароль"
+            label={t('form.password.label')}
             validationRules={{
               required: {
                 value: true,
-                message: 'Введите пароль',
+                message: t('form.password.error.required'),
               },
               minLength: {
                 value: 6,
-                message: `Пароль не должен быть менее чем ${6} символов`,
+                message: t('form.password.error.minLength', { amount: 6 }),
               },
             }}
           />
           <TextField
             name="name"
-            label="Имя"
+            label={t('form.name.label')}
             validationRules={{
-              required: { value: true, message: 'Введите имя' },
+              required: { value: true, message: t('form.name.error.required') },
             }}
           />
-          <Checkbox name="agree" label="С правилами согласен" />
+          <Checkbox name="agree" label={t('form.agree.label')} />
         </FormProvider>
       </div>
       <div className="card-action">
@@ -80,13 +85,13 @@ const Register = () => {
             className="btn waves-effect waves-light auth-submit"
             type="submit"
           >
-            Зарегистрироваться
+            {t('register.register_now')}
             <i className="material-icons right">send</i>
           </button>
         </div>
         <p className="center">
-          Уже есть аккаунт?
-          <NavLink to={AppPaths.login}>Войти!</NavLink>
+          <span style={{ marginRight: 8 }}>{t('register.account_exist')}</span>
+          <NavLink to={AppPaths.login}>{t('register.come_in')}</NavLink>
         </p>
       </div>
     </form>

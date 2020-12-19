@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../store/rootState'
 import { useHistory } from 'react-router-dom'
 import { action } from '../../../store/rootActions'
+import { useTranslation } from 'react-i18next'
 
 const NavbarDropdown = () => {
   const { name } = useSelector((state: RootState) => state.info)
   const refDropdown = useRef<HTMLAnchorElement>(null)
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -41,13 +43,15 @@ const NavbarDropdown = () => {
         <ul id="dropdown" className="dropdown-content">
           <li>
             <NavLink to={AppPaths.profile} className="black-text">
-              <i className="material-icons">account_circle</i>Профиль
+              <i className="material-icons">account_circle</i>
+              {t('profile.label')}
             </NavLink>
           </li>
           <li className="divider" tabIndex={-1} />
           <li>
             <a href="/#" onClick={logout} className="black-text">
-              <i className="material-icons">assignment_return</i>Выйти
+              <i className="material-icons">assignment_return</i>
+              {t('profile.logout')}
             </a>
           </li>
         </ul>

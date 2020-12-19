@@ -2,6 +2,7 @@ import React from 'react'
 import { AppPaths } from '../../../utils/enums'
 import SidebarLink from './SidebarLink'
 import { ValueOf } from '../../../utils/interfaces'
+import { useTranslation } from 'react-i18next'
 
 interface ISidebarLink {
   label: string
@@ -9,22 +10,24 @@ interface ISidebarLink {
   exact?: boolean
 }
 
-const sidebarLinks: Array<ISidebarLink> = [
-  { label: 'Счет', path: AppPaths.home, exact: true },
-  { label: 'История', path: AppPaths.history },
-  { label: 'Планирование', path: AppPaths.planning },
-  { label: 'Новая запись', path: AppPaths.record },
-  { label: 'Категории', path: AppPaths.categories },
-]
-
 interface Props {
   open: boolean
 }
 
 const Sidebar = ({ open }: Props) => {
+  const { t } = useTranslation()
+
   const classes = ['sidenav', 'app-sidenav']
 
   if (open) classes.push('open')
+
+  const sidebarLinks: Array<ISidebarLink> = [
+    { label: t('account.label'), path: AppPaths.home, exact: true },
+    { label: t('history.label'), path: AppPaths.history },
+    { label: t('planning.label'), path: AppPaths.planning },
+    { label: t('record.label'), path: AppPaths.record },
+    { label: t('categories.label'), path: AppPaths.categories },
+  ]
 
   return (
     <ul className={classes.join(' ')}>

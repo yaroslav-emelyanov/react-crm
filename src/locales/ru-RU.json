@@ -1,0 +1,64 @@
+{
+  "common": {
+    "home_bookkeeping": "Домашняя бухгалтерия",
+    "date": "Дата"
+  },
+  "form": {
+    "name": {
+      "label": "Имя",
+      "error": {
+        "required": "Введите имя"
+      }
+    },
+    "email": {
+      "error": {
+        "required": "Введите email",
+        "pattern": "Введите корректный email"
+      }
+    },
+    "password": {
+      "label": "Пароль",
+      "error": {
+        "required": "Введите пароль",
+        "minLength": "Пароль должен состоять не менее чем из {{ amount }} символов."
+      }
+    },
+    "agree": {
+      "label": "С правилами согласен"
+    }
+  },
+  "profile": {
+    "label": "Профиль",
+    "updated_user_name": "Имя пользователя обновлено",
+    "update": "Обновить",
+    "logout": "Выйти"
+  },
+  "register": {
+    "register_now": "Зарегистрироваться",
+    "account_exist": "Уже есть аккаунт?",
+    "come_in": "Войти!"
+  },
+  "login": {
+    "come_in": "Войти",
+    "account_not_exist": "Нет аккаунта?"
+  },
+  "account": {
+    "label": "Счёт",
+    "currency": "Валюта",
+    "currency_account": "Счёт в валюте",
+    "exchange_rate": "Курс валюты",
+    "exchange_rate_plural": "Курс валют"
+  },
+  "history": {
+    "label": "История"
+  },
+  "planning": {
+    "label": "Планирование"
+  },
+  "record": {
+    "label": "Новая запись"
+  },
+  "categories": {
+    "label": "Категории"
+  }
+}

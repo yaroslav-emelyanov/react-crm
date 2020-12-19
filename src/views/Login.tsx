@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { action } from '../store/rootActions'
 import TextField from '../components/form/TextField'
 import { emailRegex } from '../utils/regex'
+import { useTranslation } from 'react-i18next'
 
 interface DefaultValues {
   email: string
@@ -19,6 +20,7 @@ const defaultValues: DefaultValues = {
 
 const Login = () => {
   const form = useForm({ defaultValues })
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -31,31 +33,34 @@ const Login = () => {
   return (
     <form className="card auth-card" onSubmit={form.handleSubmit(onSubmit)}>
       <div className="card-content">
-        <span className="card-title">Домашняя бухгалтерия</span>
+        <span className="card-title">{t('common.home_bookkeeping')}</span>
         <FormProvider {...form}>
           <TextField
             name="email"
             label="Email"
             validationRules={{
-              required: { value: true, message: 'Введите email' },
+              required: {
+                value: true,
+                message: t('form.email.error.required'),
+              },
               pattern: {
                 value: emailRegex,
-                message: 'Введите корректную почту',
+                message: t('form.email.error.pattern'),
               },
             }}
           />
           <TextField
             name="password"
             type="password"
-            label="Пароль"
+            label={t('form.password.label')}
             validationRules={{
               required: {
                 value: true,
-                message: 'Введите пароль',
+                message: t('form.password.error.required'),
               },
               minLength: {
                 value: 6,
-                message: `Пароль не должен быть менее чем ${6} символов`,
+                message: t('form.password.error.minLength', { amount: 6 }),
               },
             }}
           />
@@ -67,14 +72,14 @@ const Login = () => {
             className="btn waves-effect waves-light auth-submit"
             type="submit"
           >
-            Войти
+            {t('login.come_in')}
             <i className="material-icons right">send</i>
           </button>
         </div>
 
         <p className="center">
-          Нет аккаунта?
-          <NavLink to={AppPaths.register}>Зарегистрироваться</NavLink>
+          <span style={{ marginRight: 8 }}>{t('login.account_not_exist')}</span>
+          <NavLink to={AppPaths.register}>{t('register.register_now')}</NavLink>
         </p>
       </div>
     </form>
