@@ -1,22 +1,25 @@
 import React from 'react'
 import HistoryTableRow from './HistoryTableRow'
 import { Record } from '../../utils/interfaces'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   records: Record[]
 }
 
 const HistoryTable = ({ records }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <table>
       <thead>
         <tr>
           <th>#</th>
-          <th>Сумма</th>
-          <th>Дата</th>
-          <th>Категория</th>
-          <th>Тип</th>
-          <th>Открыть</th>
+          <th>{t('record.sum')}</th>
+          <th>{t('common.date')}</th>
+          <th>{t('categories.label')}</th>
+          <th>{t('categories.type')}</th>
+          <th>{t('categories.open')}</th>
         </tr>
       </thead>
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Category } from '../../utils/interfaces'
 import { useFormContext } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   name: string
@@ -14,6 +15,7 @@ const CategorySelect = ({ name, items, updateCategory = false }: Props) => {
   const [selected, setSelected] = useState('')
   const ref = useRef<HTMLSelectElement>(null)
   const { reset, register } = useFormContext()
+  const { t } = useTranslation()
 
   const category = useMemo(() => items.find((item) => item.id === selected), [
     items,
@@ -50,7 +52,7 @@ const CategorySelect = ({ name, items, updateCategory = false }: Props) => {
           </option>
         ))}
       </select>
-      <label>Выберите категорию</label>
+      <label>{t('record.select_category')}</label>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { AppPaths, RecordTypes } from '../../utils/enums'
 import { currencyFilter, dateFilter } from '../../utils/filters'
 import { useHistory } from 'react-router-dom'
 import Tooltip from '../app/tooltip/Tooltip'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   record: Record
@@ -14,6 +15,7 @@ interface Props {
 
 const HistoryTableRow = ({ record, recordNumber }: Props) => {
   const { categories } = useSelector((state: RootState) => state.info)
+  const { t } = useTranslation()
   const history = useHistory()
 
   const handleClick = () => {
@@ -29,7 +31,9 @@ const HistoryTableRow = ({ record, recordNumber }: Props) => {
   const color = isOutcome ? 'red' : 'green'
   const classes = ['white-text', 'badge', color]
 
-  const textRecordType = isOutcome ? 'Расход' : 'Доход'
+  const textRecordType = isOutcome
+    ? t('categories.outcome')
+    : t('categories.income')
 
   return (
     <tr>
@@ -41,7 +45,7 @@ const HistoryTableRow = ({ record, recordNumber }: Props) => {
         <span className={classes.join(' ')}>{textRecordType}</span>
       </td>
       <td>
-        <Tooltip title={'Просмотреть запись'}>
+        <Tooltip title={t('categories.view_record')}>
           <button className="btn-small btn" onClick={handleClick}>
             <i className="material-icons">open_in_new</i>
           </button>

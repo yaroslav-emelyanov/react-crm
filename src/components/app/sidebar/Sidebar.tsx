@@ -26,7 +26,7 @@ const Sidebar = ({ open }: Props) => {
     { label: t('history.label'), path: AppPaths.history },
     { label: t('planning.label'), path: AppPaths.planning },
     { label: t('record.label'), path: AppPaths.record },
-    { label: t('categories.label'), path: AppPaths.categories },
+    { label: t('categories.label_plural'), path: AppPaths.categories },
   ]
 
   return (

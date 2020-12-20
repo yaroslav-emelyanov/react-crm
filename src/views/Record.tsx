@@ -12,6 +12,7 @@ import { AppPaths, RecordTypes } from '../utils/enums'
 import { notification } from '../utils/plugins'
 import { NewRecord } from '../utils/interfaces'
 import { calculateBill, canCreateRecord } from '../utils/functions'
+import { useTranslation } from 'react-i18next'
 
 const defaultValues: NewRecord = {
   categoryId: '',
@@ -26,6 +27,7 @@ const Record = () => {
   )
   const [loading, setLoading] = useState(false)
   const formHook = useForm<NewRecord>({ defaultValues })
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const getCategories = useCallback(async () => {
@@ -42,7 +44,7 @@ const Record = () => {
     data.amount = +data.amount
 
     if (canCreateRecord(bill, data)) {
-      notification.info(`Не достаточно средств на счёте`)
+      notification.info(t('record.insufficient_funds'))
       return
     }
 
@@ -51,7 +53,7 @@ const Record = () => {
       action.updateUserInfo({ name, bill: calculateBill(bill, data) })
     )
 
-    notification.info(`Запись успешно создана`)
+    notification.info(t('record.record_created'))
     formHook.reset(defaultValues)
     M.updateTextFields()
   }
@@ -59,15 +61,19 @@ const Record = () => {
   return (
     <div>
       <div className="page-title">
-        <h3>Новая запись</h3>
+        <h3>{t('record.label')}</h3>
       </div>
 
       {loading ? (
         <Loader />
       ) : !categories.length ? (
         <p className="center">
-          Категорий пока нет.{' '}
-          <NavLink to={AppPaths.categories}>Создать категорию</NavLink>
+          <span style={{ marginRight: 8 }}>
+            {t('record.no_categories_yet')}.
+          </span>
+          <NavLink to={AppPaths.categories}>
+            {t('categories.create_category')}
+          </NavLink>
         </p>
       ) : (
         <FormProvider {...formHook}>
@@ -77,33 +83,39 @@ const Record = () => {
             <RadioGroup
               name="type"
               items={[
-                { value: 'income', label: 'Доход' },
-                { value: 'outcome', label: 'Расход' },
+                { value: RecordTypes.income, label: t('categories.income') },
+                { value: RecordTypes.outcome, label: t('categories.outcome') },
               ]}
             />
 
             <TextField
               name="amount"
-              label="Сумма"
+              label={t('form.sum.label')}
               type="number"
               validationRules={{
-                required: { value: true, message: 'Введите сумму' },
+                required: {
+                  value: true,
+                  message: t('form.sum.error.required'),
+                },
                 min: {
                   value: 1,
-                  message: 'Сумма должна быть больше или равна 1',
+                  message: t('form.sum.error.min', { min: 1 }),
                 },
               }}
             />
             <TextField
               name="description"
-              label="Описание"
+              label={t('form.description.label')}
               validationRules={{
-                required: { value: true, message: 'Введите описание' },
+                required: {
+                  value: true,
+                  message: t('form.description.error.required'),
+                },
               }}
             />
 
             <button className="btn waves-effect waves-light" type="submit">
-              Создать
+              {t('record.create_record')}
               <i className="material-icons right">send</i>
             </button>
           </form>

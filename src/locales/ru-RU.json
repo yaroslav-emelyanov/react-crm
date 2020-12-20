@@ -1,7 +1,10 @@
 {
   "common": {
     "home_bookkeeping": "Домашняя бухгалтерия",
-    "date": "Дата"
+    "date": "Дата",
+    "create": "Создать",
+    "edit": "Редактировать",
+    "update": "Обновить"
   },
   "form": {
     "name": {
@@ -25,6 +28,32 @@
     },
     "agree": {
       "label": "С правилами согласен"
+    },
+    "sum": {
+      "label": "Сумма",
+      "error": {
+        "required": "Введите сумму",
+        "min": "Сумма должна быть больше или равна {{ min }}"
+      }
+    },
+    "description": {
+      "label": "Описание",
+      "error": {
+        "required": "Введите описание"
+      }
+    },
+    "category_name": {
+      "label": "Название категории",
+      "error": {
+        "required": "Введите название категории"
+      }
+    },
+    "limit": {
+      "label": "Лимит",
+      "error": {
+        "required": "Введите число",
+        "min": "Минимальное значение {{ min }}"
+      }
     }
   },
   "profile": {
@@ -50,15 +79,37 @@
     "exchange_rate_plural": "Курс валют"
   },
   "history": {
-    "label": "История"
+    "label": "История записей"
   },
   "planning": {
-    "label": "Планирование"
+    "label": "Планирование",
+    "no_categories_yet": "Категорий пока нет",
+    "create_category": "Создать категорию",
+    "excess": "Привышение на {{ amount }}",
+    "left": "Осталось {{ amount }}",
+    "from": "{{ spent }} из {{ limit }}"
   },
   "record": {
-    "label": "Новая запись"
+    "label": "Новая запись",
+    "no_records_yet": "Записей пока нет",
+    "create_record": "Создать запись",
+    "sum": "Сумма",
+    "insufficient_funds": "Недостаточно средств на счёте",
+    "record_created": "Запись создана",
+    "no_categories_yet": "Категорий пока нет",
+    "select_category": "Выберите категорию"
   },
   "categories": {
-    "label": "Категории"
+    "label": "Категория",
+    "label_plural": "Категории",
+    "type": "Тип",
+    "open": "Открыть",
+    "outcome": "Расход",
+    "income": "Доход",
+    "view_record": "Просмотр записи",
+    "create_category": "Создать категорию",
+    "category_created": "Категория создана",
+    "category_updated": "Категория обновлена",
+    "edit_category": "Редактировать категорию"
   }
 }

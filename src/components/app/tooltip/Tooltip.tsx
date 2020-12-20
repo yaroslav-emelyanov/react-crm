@@ -18,11 +18,7 @@ const Tooltip: React.FC<Props> = ({ children, title }) => {
     }
   }
   return (
-    <div
-      ref={ref}
-      style={{ width: 'fit-content' }}
-      onMouseOver={handleMouseOver}
-    >
+    <div ref={ref} onMouseOver={handleMouseOver}>
       {children}
     </div>
   )

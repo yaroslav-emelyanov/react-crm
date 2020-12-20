@@ -4,9 +4,11 @@ import EditCategory from '../components/categories/EditCategory'
 import { useDispatch } from 'react-redux'
 import { action } from '../store/rootActions'
 import Loader from '../components/app/loader/Loader'
+import { useTranslation } from 'react-i18next'
 
 const Categories = () => {
   const [loading, setLoading] = useState(false)
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const getCategories = useCallback(async () => {
@@ -22,7 +24,7 @@ const Categories = () => {
   return (
     <div>
       <div className="page-title">
-        <h3>Категории</h3>
+        <h3>{t('categories.label_plural')}</h3>
       </div>
       <section>
         {loading ? (

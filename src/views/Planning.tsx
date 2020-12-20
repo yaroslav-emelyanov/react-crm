@@ -8,12 +8,14 @@ import { AppPaths } from '../utils/enums'
 import { currencyFilter } from '../utils/filters'
 import { expandCategories } from '../utils/functions'
 import CategoryProgress from '../components/planning/CategoryProgress'
+import { useTranslation } from 'react-i18next'
 
 const Planning = () => {
   const { categories, bill, records } = useSelector(
     (state: RootState) => state.info
   )
   const [loading, setLoading] = useState(false)
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const Planning = () => {
   return (
     <div>
       <div className="page-title">
-        <h3>Планирование</h3>
+        <h3>{t('planning.label')}</h3>
         <h4>{currencyFilter(bill)}</h4>
       </div>
 
@@ -41,8 +43,12 @@ const Planning = () => {
         <Loader />
       ) : !expandedCategories.length ? (
         <p className="center">
-          Категорий пока нет.{' '}
-          <NavLink to={AppPaths.categories}>Создать категорию</NavLink>
+          <span style={{ marginRight: 8 }}>
+            {t('planning.no_categories_yet')}.
+          </span>
+          <NavLink to={AppPaths.categories}>
+            {t('planning.create_category')}
+          </NavLink>
         </p>
       ) : (
         <section>

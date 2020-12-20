@@ -1,7 +1,10 @@
 {
   "common": {
     "home_bookkeeping": "Home bookkeeping",
-    "date": "Date"
+    "date": "Date",
+    "create": "Create",
+    "edit": "Edit",
+    "update": "Update"
   },
   "form": {
     "name": {
@@ -25,6 +28,32 @@
     },
     "agree": {
       "label": "I agree with the rules"
+    },
+    "sum": {
+      "label": "Sum",
+      "error": {
+        "required": "Enter sum",
+        "min": "Amount must be greater than or equal to {{ min }}"
+      }
+    },
+    "description": {
+      "label": "Description",
+      "error": {
+        "required": "Enter description"
+      }
+    },
+    "category_name": {
+      "label": "Category name",
+      "error": {
+        "required": "Enter category name"
+      }
+    },
+    "limit": {
+      "label": "Limit",
+      "error": {
+        "required": "Enter number",
+        "min": "Minimum value {{ min }}"
+      }
     }
   },
   "profile": {
@@ -50,15 +79,37 @@
     "exchange_rate_plural": "Exchange rates"
   },
   "history": {
-    "label": "History"
+    "label": "History records"
   },
   "planning": {
-    "label": "Planning"
+    "label": "Planning",
+    "no_categories_yet": "No categories yet",
+    "create_category": "Create category",
+    "excess": "Excess by {{ amount }}",
+    "left": "{{ amount }} left",
+    "from": "{{ spent }} from {{ limit }}"
   },
   "record": {
-    "label": "New record"
+    "label": "New record",
+    "no_records_yet": "No records yet",
+    "create_record": "Create record",
+    "sum": "Sum",
+    "insufficient_funds": "Insufficient funds on the account",
+    "record_created": "Record created",
+    "no_categories_yet": "No categories yet",
+    "select_category": "Select category"
   },
   "categories": {
-    "label": "Categories"
+    "label": "Category",
+    "label_plural": "Categories",
+    "type": "Type",
+    "open": "Open",
+    "outcome": "Outcome",
+    "income": "Income",
+    "view_record": "View record",
+    "create_category": "Create category",
+    "category_created": "Category created",
+    "category_updated": "Category updated",
+    "edit_category": "Edit category"
   }
 }

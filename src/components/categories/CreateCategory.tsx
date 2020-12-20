@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { action } from '../../store/rootActions'
 import { CategoryParams } from '../../utils/interfaces'
 import { notification } from '../../utils/plugins'
+import { useTranslation } from 'react-i18next'
 
 const defaultValues: CategoryParams = {
   name: '',
@@ -13,6 +14,7 @@ const defaultValues: CategoryParams = {
 
 const CreateCategory = () => {
   const formHook = useForm({ defaultValues })
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const onSubmit: SubmitHandler<CategoryParams> = async (date) => {
@@ -20,36 +22,45 @@ const CreateCategory = () => {
     await dispatch(action.createCategory(date))
     formHook.reset()
     M.updateTextFields()
-    notification.info('Запись была создана')
+    notification.info(t('categories.category_created'))
   }
 
   return (
     <div className="col s12 m6">
       <div>
         <div className="page-subtitle">
-          <h4>Создать</h4>
+          <h4>{t('common.create')}</h4>
         </div>
         <FormProvider {...formHook}>
           <form onSubmit={formHook.handleSubmit(onSubmit)}>
             <TextField
               name="name"
-              label="Название"
+              label={t('form.category_name.label')}
               validationRules={{
-                required: { value: true, message: 'Введите название' },
+                required: {
+                  value: true,
+                  message: t('form.category_name.error.required'),
+                },
               }}
             />
 
             <TextField
               name="limit"
               type="number"
-              label="Лимит"
+              label={t('form.limit.label')}
               validationRules={{
-                required: { value: true, message: 'Введите число' },
-                min: { value: 1, message: 'Минимальная величина 1' },
+                required: {
+                  value: true,
+                  message: t('form.limit.error.required'),
+                },
+                min: {
+                  value: 1,
+                  message: t('form.limit.error.min', { min: 1 }),
+                },
               }}
             />
             <button className="btn waves-effect waves-light" type="submit">
-              Создать
+              {t('common.create')}
               <i className="material-icons right">send</i>
             </button>
           </form>
