@@ -43,7 +43,7 @@ const Record = () => {
   const onSubmit: SubmitHandler<NewRecord> = async (data) => {
     data.amount = +data.amount
 
-    if (canCreateRecord(bill, data)) {
+    if (!canCreateRecord(bill, data)) {
       notification.info(t('record.insufficient_funds'))
       return
     }

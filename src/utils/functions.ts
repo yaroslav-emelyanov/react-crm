@@ -51,7 +51,7 @@ export const computedCurrency = (base: number, rate: number) =>
   Math.floor(base * rate)
 
 export const canCreateRecord = (bill: number, record: NewRecord | Record) =>
-  record.type === RecordTypes.outcome && record.amount > bill
+  record.type === RecordTypes.outcome && bill >= record.amount
 
 export const calculateBill = (bill: number, record: NewRecord | Record) =>
   record.type === RecordTypes.income
@@ -60,8 +60,10 @@ export const calculateBill = (bill: number, record: NewRecord | Record) =>
 
 export const getCategorySpend = (categoryId: string, records: Record[]) =>
   records
-    .filter((record) => record.categoryId === categoryId)
-    .filter((record) => record.type === RecordTypes.outcome)
+    .filter(
+      (record) =>
+        record.categoryId === categoryId && record.type === RecordTypes.outcome
+    )
     .reduce((total, record) => (total += record.amount), 0)
 
 export const getCategoryProgress = (
